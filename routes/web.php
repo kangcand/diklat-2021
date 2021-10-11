@@ -18,15 +18,17 @@ Route::get('/', function () {
 });
 
 // Admin Route
-Route::prefix('admin')->group(function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     // admin/artikel
+    Route::get('/', function () {
+        return view('admin.index');
+    });
     Route::get('/artikel', function () {
-        return view('artikel.index');
+        return view('admin.artikel.index');
     });
     Route::get('/kategori', function () {
-        return view('kategori.index');
+        return view('admin.kategori.index');
     });
-
 });
 
 Auth::routes();
