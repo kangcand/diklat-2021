@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\WriterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,12 +25,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/', function () {
         return view('admin.index');
     });
-    Route::get('/artikel', function () {
-        return view('admin.artikel.index');
-    });
-    Route::get('/kategori', function () {
-        return view('admin.kategori.index');
-    });
+    Route::resource('/penulis', WriterController::class);
+    Route::resource('/buku', BookController::class);
+
 });
 
 Auth::routes();
